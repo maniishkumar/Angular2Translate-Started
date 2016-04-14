@@ -1,0 +1,29 @@
+import {Component, provide} from 'angular2/core';
+import {HTTP_PROVIDERS, Http} from 'angular2/http';
+import {TRANSLATE_PROVIDERS, TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
+
+@Component({
+	selector: 'app-web',
+	templateUrl: '../app/app.html',
+	providers: [HTTP_PROVIDERS, TRANSLATE_PROVIDERS, provide(TranslateLoader, {
+        useFactory: (http: Http) => new TranslateStaticLoader(http, 'assets/i18n', '.json'),
+        deps: [Http]
+    }),
+    TranslateService],
+    pipes: [TranslatePipe]
+})
+
+export class AppComponent{
+	param: string = "world";
+
+    constructor(translate: TranslateService) {
+        var userLang = navigator.language.split('-')[0]; // use navigator lang if available
+        userLang = /(ru|en)/gi.test(userLang) ? userLang : 'en';
+
+		// this language will be used as a fallback when a translation isn't found in the current language
+        translate.setDefaultLang('en');
+
+		// the lang to use, if the lang isn't available, it will use the current loader to get them
+        translate.use(userLang);
+    }
+}

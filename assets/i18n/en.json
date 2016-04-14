@@ -1,0 +1,4 @@
+{
+    "HELLO": "Welcome hello {{value}}",
+    "HEY": "Hey {{value}}"
+}

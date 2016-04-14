@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ng2 Translate sample app testing</title>
+	<script type="text/javascript" src="../node_modules/angular2/bundles/angular2-polyfills.js"></script>
+	<script type="text/javascript" src="../node_modules/es6-shim/es6-shim.min.js"></script>
+	<script type="text/javascript" src="../node_modules/systemjs/dist/system.js"></script>
+	<script type="text/javascript" src="../node_modules/typescript/lib/typescript.js"></script>
+	<script type="text/javascript">
+	System.defaultJSExtensions = true;
+	System.config({		
+        transpiler: 'typescript', 
+        typescriptOptions: { emitDecoratorMetadata: true }, 
+        packages: {
+        	"/angular2": {defaultExtension: false},
+        	"app": {defaultExtension: 'ts'},
+        	"ng2-translate": {
+        		main: 'ng2-translate.js',
+                defaultExtension: "js",
+                map: {
+                    "ng2-translate": "./ng2-translate.js"
+                }
+        	}
+        },
+        map: {
+			"ng2-translate": "../../node_modules/ng2-translate"
+		} 
+      });
+      
+	</script>
+	<script type="text/javascript" src="../node_modules/rxjs/bundles/Rx.js"></script>
+	<script type="text/javascript" src="../node_modules/angular2/bundles/angular2.dev.js"></script>
+	<script type="text/javascript" src="../node_modules/angular2/bundles/http.dev.js"></script>
+	<script type="text/javascript" src="../node_modules/angular2-translate/dist/index.js"></script>
+	<script type="text/javascript">
+		System.import('app/boot.ts')
+            .then(null, console.error.bind(console));
+	</script>
+</head>
+<body>
+<div>
+	Main component is loading...
+	<app-web></app-web>
+</div>
+</body>
+</html>
